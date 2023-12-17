@@ -16,7 +16,6 @@ const books = [
   { id: 7, title: 'larave 0 to hero', author: 'Author 7' , reviews: ''},
   { id: 10, title: 'How to become developer', author: 'Author 7' ,review:["this book foucs more on the most important thing you should foucs on to become good develooper"]},
 
-  // Add more books as needed
 ];
 
 // Endpoint to get the book list
@@ -56,13 +55,11 @@ app.get('/books/Title/:Title', (req, res) => {
 //   veiw book based on review
 function getBookReviewById(id) {
     return new Promise((resolve, reject) => {
-      // Simulate fetching the book review from a database or API
       const review = books.find((r) => r.id === Number(id));
   
       if (review) {
         resolve(review);
       } else {
-        // If review is not found, reject the promise with an error
         reject(new Error('Book review not found'));
       }
     });
@@ -87,29 +84,22 @@ const users = [];
 // Endpoint to handle user registration
 app.post('/register', (req, res) => {
   const { username, password } = req.body;
-
-  // Check if the username is already taken
   const existingUser = users.find(user => user.username === username);
   if (existingUser) {
     return res.status(400).json({ error: 'Username already taken' });
   }
 
-  // If the username is available, create a new user
-  const newUser = { username, password };
+    const newUser = { username, password };
   users.push(newUser);
 
-  // Return a success message
   res.json({ message: 'User registered successfully', user: newUser });
 });
 // login Endpoint
 app.post('/login', (req, res) => {
   const { username, password } = req.body;
-
-  // Check if the username and password match a registered user
   const user = users.find(user => user.username === username && user.password === password);
 
   if (user) {
-    // Return a success message
     res.json({ message: 'Logged in successfully' });
   } else {
     return res.status(400).json({ error: 'Invalid username or password' });
@@ -162,10 +152,9 @@ app.get('/books', async (req, res) => {
 // Async function to get all books
 async function getAllBooks() {
   return new Promise((resolve, reject) => {
-    // Simulate fetching all books from a database or API
-    setTimeout(() => {
+      setTimeout(() => {
       resolve(books);
-    }, 1000); // Simulating a delay of 1 second
+    }, 1000); 
   });
 }
 // Endpoint to search by ISBN using Promises
@@ -189,8 +178,7 @@ app.get('/books/isbn/:isbn', (req, res) => {
 // Promise function to search by ISBN
 function searchByISBN(isbn) {
   return new Promise((resolve) => {
-    // Simulate fetching the book by ISBN from a database or API
-    const book = books.find((b) => b.id.toString() === isbn);
+     const book = books.find((b) => b.id.toString() === isbn);
     resolve(book);
   });
 }
